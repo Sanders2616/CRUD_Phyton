@@ -8,8 +8,17 @@ router=APIRouter()
 @router.get('/getAll')
 def ObtenerAlumnos():
     result=conn.execute(alumnos.select()).fetchall()
-    print(result)
-    return "alumnos"
+    response=[]
+    for tuple in result:
+        alumno={
+            "matricula":tuple[0],
+            "nombre":tuple[1],
+            "apellidos":tuple[2],
+            "cuatrimestre":tuple[3],
+            "promedio":tuple[4]
+        }
+        response.append(alumno)
+        return response
 
 @router.post('/insert')
 def insertAlumno(alumno:Alumno):
