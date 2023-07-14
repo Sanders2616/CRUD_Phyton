@@ -61,16 +61,16 @@ def actualizarAlumno(alumno:Alumno,matricula):
 
 
 
-@router.delete('/deleteone/{matricula}')
+@router.delete('/deleteOne/{matricula}')
 def eliminarAlumno(matricula):
-     res=obtenerAlumno(matricula)
+    res = obtenerAlumno(matricula)
     print(res)
-    if res.get("status")=="No existe el alumno":
-        return res
+    if res.get("status")=="No existe Alumno":
+       return res
     else:
-        result=conn.execute(alumnos.delete().where(alumnos.c.matricula==matricula))
+        result = conn.execute(alumnos.delete().where(alumnos.c.matricula==matricula))
         conn.commit()
-        res={
-            "status":"Alumno eliminado"
+        res = {
+        "status": f"Alumno con matrícula {matricula} eliminado con éxito"
         }
     return res
